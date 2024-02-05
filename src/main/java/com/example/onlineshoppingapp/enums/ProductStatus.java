@@ -1,2 +1,5 @@
-package com.example.onlineshoppingapp.enums;public enum ProductStatus {
+package com.example.onlineshoppingapp.enums;
+
+public enum ProductStatus {
+    AVAILABLE, DISCOUNTED
 }

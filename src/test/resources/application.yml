@@ -1,8 +1,19 @@
 spring:
+  datasource:
+    #url: jdbc:tc:${image-name}:${tag}://${database-name}
+    url: jdbc:tc:postgresql:13.1:///test_database
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    username: user
+    password: password
   flyway:
-    enabled: false
+    enabled: true
   jpa:
     properties:
       hibernate:
         show_sql: true
         format_sql: true
+      javax:
+        persistence:
+          schema-generation:
+            database:
+              action: create-drop

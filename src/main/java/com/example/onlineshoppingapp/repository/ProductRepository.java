@@ -1,2 +1,14 @@
-package com.example.onlineshoppingapp.repository;public interface ProductRepository {
+package com.example.onlineshoppingapp.repository;
+
+import com.example.onlineshoppingapp.model.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    List<Product> findAllByCategoryId(Long categoryId);
+
+    long countAllByCategoryId(Long categoryId);
 }

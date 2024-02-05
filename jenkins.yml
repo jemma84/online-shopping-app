@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  jenkins:
+     image: jenkins/jenkins:lts
+     privileged: true
+     user: root
+     ports:
+       - 8080:8080
+       - 50000:50000
+     container_name: jenkins
+     volumes:
+          - ./ci/jenkins_compose/jenkins_configuration:/var/jenkins_home
+          - /var/run/docker.sock:/var/run/docker.sock
+  agent:
+     image: jenkins/ssh-agent:jdk11
+     privileged: true
+     user: root
+     container_name: agent
+     expose:
+      - 22
+     environment:
+        - JENKINS_AGENT_SSH_PUBKEY = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDIewfGF03HGRc6BebsKXyGNT7/bZMyXaIvAgKbe1G1I7/KmSOi+w0ZlIEugi8xaOdpSIq20gvYprzrHydIjbmWzP/AODj6uJS11uzy6UvxAVmvaTgC1N0rEwOdGEiLAPoenBm/Ev2TEg1Thuw4ni/Mfl8hPdbw37LdWLbvfNlqvncs8ip6azA0iPuIo2HdkbECjx4x3Y/QtlK3hpDBH4xo3W8mnvY6Rkhy/F9BlqIamfMZLGsFHDbp5ShpVv3f87Izp97YG/ZWdCdiQ88N3SSGCY57abi+hwSFV1p9v5JGL/xAPVdet+/XqWup+ITymzHk3p4ZPchTU6wD4mDDLZxzzpb+eoeGNedsQh/+ijE0V+JFYS7Hyiz8kBYYoFQi9sJvk3RhvXs7zoF6VlivkGKAjUYNZoZEjF4MXUbFNndz2mzBwCgeU1cH/5OX/QLCkhsFpjQZxI4mILVaAXj0AsWJa3woGrslk4Bq/xjTFuuQzq40VbMtvey6Vbh0dgpeHHU= root@beebc7f85aab
